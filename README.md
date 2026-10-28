@@ -22,7 +22,7 @@ This is a computational research branch of [ChainsInPumpedGPUfield](https://gith
 | Main failure mode to investigate | Runaway growth and poor round-2 copying | Apparent computation explained by the bare field, instantaneous input, geometry alone or trivial readout |
 | Role of DNA-like chemistry | Goal | Optional way to make persistent structures; replication is **not required** |
 
-**Current implementation status (28 October 2026):** The physics, viewer, templating experiments and saved results are inherited from the original project. **No trained reservoir readout, controlled computational benchmark, learnable input interface, or demonstrated sequence-to-function advantage is implemented yet.** A renamed repository is not itself evidence of computation. The experiments below are the intended research program.
+**Implementation status (28 October 2026):** The physics, viewer, templating experiments and saved results are inherited from the original project. **Controlled external field stimulation, spatial/phase probes, and a matched-composition sequence-response experiment are now implemented.** No trained reservoir readout, held-out computational task benchmark, growth-dependent learning result, or demonstrated sequence-to-function advantage exists yet. A measurable response is not automatically a computation.
 
 ## What the existing simulator gives us
 
@@ -42,6 +42,61 @@ wave field → oscillator response → motion and prolonged contact → new bond
 ```
 
 Whether that loop realizes useful *computation* remains an experimental question.
+
+## Run a controlled input/output experiment
+
+The first computational-instrumentation milestone is implemented in [chains/probing.py](chains/probing.py) and [experiments/sequence_response.py](experiments/sequence_response.py). It adds an **optional external wave source** to the simulator without changing existing no-input runs.
+
+### Quick start
+
+```bash
+pip install -r requirements.txt
+pip install pytest                    # for tests only
+python experiments/sequence_response.py --steps 400 --warmup 300 --seeds 1
+python experiments/sequence_response.py --seq-a ACGTACGT --seq-b AGCTAGCT \
+    --steps 800 --warmup 500 --seeds 3 --omega 0.11 --out runs/order_test
+python experiments/sequence_response.py --kind impulse --steps 500 --out runs/impulse
+python experiments/sequence_response.py --mobile --steps 400 --out runs/mobile
+python -m pytest -q tests/test_probing.py
+```
+
+For a custom waveform, save a JSON array of sample values, such as `[0, 1, 0, -1, 0]`, and provide `--signal-file drive.json`. The input is multiplied by `--amplitude`; `--start` specifies its first step relative to the end of warmup. Other waveforms are `--kind sine`, `square` and `impulse`. Stimulus width and position define a unit-sum periodic spatial source; sine frequency `--omega` is measured in **radians per simulation step**.
+
+The experiment constructs two different sequences with **identical letter counts and bead positions** (default ACGTACGT versus AGCTAGCT), applies the same stimulus, and records five field sensors. For each seed and structure, it runs an identical **undriven counterfactual**, then calculates:
+
+```text
+response(t, sensor) = field_driven(t, sensor) - field_undriven(t, sensor)
+sequence contrast  = RMS(response_sequence_A - response_sequence_B)
+bond contrast      = RMS(response_bonded - response_unbonded)
+```
+
+It compares **bonded chains**, **unbonded monomers at the same locations**, and an **empty-field** control. `--chain-boost 0` (the experiment's default) matches emission strength per monomer across the bonded and unbonded cases. Ordinary simulator defaults are unchanged.
+
+Output directory:
+
+- `trace.csv`: time series for driven, undriven and difference traces, by seed, layout, and sensor.
+- `summary.json`: full input geometry, parameters, drive schedule, per-layout RMS responses and sequence/bond contrast statistics.
+
+By default, particles are **pinned** so changes in spatial configuration cannot masquerade as sequence effects. That creates an important negative control: with matched emissions and fixed positions, backbone bonds cannot influence the dynamics. **A nonzero sequence contrast in pinned layouts is therefore evidence of frequency arrangement affecting response, not evidence of the bonds doing computation.** Use `--mobile` to permit bond mechanics to influence motion (new ligation stays disabled), and interpret differences alongside geometry controls.
+
+This tool establishes a reproducible measurement protocol. It does **not** train a decoder, assess held-out task accuracy, prove learning, or establish a computational advantage.
+
+### Python API
+
+```python
+from chains import Config, World
+from chains.probing import Stimulus, FieldProbes, record_response
+
+w = World(Config(N=64, seed=3))
+stim = Stimulus(position=(20, 32), kind="sine", amplitude=0.05,
+                omega=0.11, duration=250, width=1.0)
+trace = record_response(w, stim, [(30, 32), (40, 32)],
+                        steps=400, warmup=200, sample_every=2)
+# trace["step"], trace["drive"], trace["field"]
+# For oscillator phase sensors, also pass monomer_ids=(0, 1, ...)
+```
+
+The core world step also accepts `world.step(external_source=field_tensor)`, where `field_tensor` must have the same 2D shape as the field. Omitting it retains the parent simulator's behavior.
 
 ## Research program
 
@@ -177,12 +232,12 @@ python -m pytest -q tests
 
 Live-viewer keys: `SPACE` pause, `P` toggle pump, `F` toggle field display, `+/-` change steps per frame, `S` save screenshot, left-drag stir, `ESC` exit. A red, C yellow, G green, T blue; white lines are backbone bonds.
 
-**Not yet available:** a CLI for controlled input/output probing, growing and freezing a reservoir, or benchmarking a trained readout. Those require new code; the commands above reproduce the inherited assembly simulator.
+**Now available:** controlled input/output probing via `experiments/sequence_response.py`. **Not yet available:** a grow/freeze reservoir workflow or a trained readout benchmark. The inherited commands above remain unchanged.
 
 ## Development order
 
-1. **Add controlled stimulus and probe APIs.** Keep reproducible input schedules, field/phase readings, checkpoints and per-seed outputs.
-2. **Establish sequence-order transfer functions.** Same composition, matched geometry and drive, shuffled-order controls.
+1. **Controlled stimuli and probes — first version implemented.** Per-seed measurements and reproducible input schedules now work; checkpoint/restart remains to be added.
+2. **Measure and validate sequence-order transfer functions.** The paired protocol exists; run seed ensembles, multiple input frequencies and orientation/phase-shuffle controls before drawing conclusions.
 3. **Add a grow/set/probe lifecycle.** Separate assembly time from measurement and permit a fixed structure with ongoing wave/phase dynamics.
 4. **Benchmark temporal and nonlinear memory.** Start with a linear readout and strict held-out controls.
 5. **Optimize GPU neighbor search**, then repeat across large ensembles and examine pump-programmable computation.
