@@ -1,0 +1,524 @@
+{
+  "experiment": "counterfactual_bond_ablation",
+  "description": "Same warmed-up world state; bonds kept, cut, or mechanically disabled",
+  "sequences": [
+    "ACGTACGT",
+    "AGCTAGCT"
+  ],
+  "source": [
+    30.4,
+    48.0
+  ],
+  "probes": [
+    [
+      33.4,
+      48.0
+    ],
+    [
+      48.0,
+      48.0
+    ],
+    [
+      63.599999999999994,
+      48.0
+    ],
+    [
+      67.6,
+      48.0
+    ],
+    [
+      63.599999999999994,
+      53.0
+    ]
+  ],
+  "output_probe_indices": [
+    2,
+    3,
+    4
+  ],
+  "parameters": {
+    "seq_a": "ACGTACGT",
+    "seq_b": "AGCTAGCT",
+    "N": 96,
+    "device": "auto",
+    "steps": 800,
+    "warmup": 500,
+    "sample_every": 2,
+    "seed": 0,
+    "seeds": 3,
+    "kind": "sine",
+    "start": 0,
+    "duration": 250,
+    "amplitude": 0.05,
+    "omega": 0.11,
+    "width": 1.0,
+    "freeze": true,
+    "out": "runs/ablation_frozen"
+  },
+  "physics_config": {
+    "N": 96,
+    "seed": 0,
+    "device": "auto",
+    "c2": 0.3,
+    "m2": 0.02,
+    "gamma": 0.01,
+    "Omega": 0.07,
+    "mode": "receiver",
+    "h_medium": 0.3,
+    "pump_on": true,
+    "alphabet": {
+      "A": 0.03,
+      "C": 0.05,
+      "G": 0.09,
+      "T": 0.11
+    },
+    "g_emit": 0.1,
+    "chain_boost": 0.0,
+    "g_phase": 0.02,
+    "k_force": 1.0,
+    "phase_noise": 0.0,
+    "hear_self": false,
+    "mobility": 1.0,
+    "kT": 0.0,
+    "r_core": 2.0,
+    "k_core": 0.05,
+    "d0": 3.6,
+    "k_bond": 0.05,
+    "k_bend": 0.02,
+    "held_tau": 100.0,
+    "held_min": 0.05,
+    "lig_window": 0.3,
+    "lig_decay": 0.97,
+    "lig_score": 6.0,
+    "p_lig": 0.0,
+    "lig_every": 10
+  },
+  "statistics": [
+    {
+      "seed": 0,
+      "sequence": "ACGTACGT",
+      "interaction_rms_by_probe": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "interaction_output_rms": 0.0,
+      "interaction_center_rms": 0.0,
+      "interaction_near_input_rms": 0.0,
+      "bonded_output_response_rms": 0.000801115354988724,
+      "cut_output_response_rms": 0.000801115354988724,
+      "sham_minus_cut_rms": 0.0,
+      "unforced_bond_cut_rms": 0.0,
+      "bond_cut_geometry_mean_distance": 0.0,
+      "bonded_input_induced_geometry_mean_distance": 0.0,
+      "bonded_output_to_cut_output_rms_ratio": 1.0,
+      "initial": {
+        "step": 500,
+        "position": [
+          [
+            35.42471694946289,
+            48.0
+          ],
+          [
+            38.996829986572266,
+            48.0
+          ],
+          [
+            42.6015510559082,
+            48.0
+          ],
+          [
+            46.23432159423828,
+            48.0
+          ],
+          [
+            49.79053497314453,
+            48.0
+          ],
+          [
+            53.36555480957031,
+            48.0
+          ],
+          [
+            56.947635650634766,
+            48.0
+          ],
+          [
+            60.46643829345703,
+            48.0
+          ]
+        ],
+        "phase": [
+          4.123656272888184,
+          4.463331699371338,
+          2.0125820636749268,
+          4.353810787200928,
+          3.044593095779419,
+          4.153468132019043,
+          3.1755735874176025,
+          3.683631658554077
+        ],
+        "field_norm": 1.4538835287094116
+      },
+      "label": "A"
+    },
+    {
+      "seed": 0,
+      "sequence": "AGCTAGCT",
+      "interaction_rms_by_probe": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "interaction_output_rms": 0.0,
+      "interaction_center_rms": 0.0,
+      "interaction_near_input_rms": 0.0,
+      "bonded_output_response_rms": 0.0007303511956706643,
+      "cut_output_response_rms": 0.0007303511956706643,
+      "sham_minus_cut_rms": 0.0,
+      "unforced_bond_cut_rms": 0.0,
+      "bond_cut_geometry_mean_distance": 0.0,
+      "bonded_input_induced_geometry_mean_distance": 0.0,
+      "bonded_output_to_cut_output_rms_ratio": 1.0,
+      "initial": {
+        "step": 500,
+        "position": [
+          [
+            35.36853790283203,
+            48.0
+          ],
+          [
+            38.968971252441406,
+            48.0
+          ],
+          [
+            42.52998352050781,
+            48.0
+          ],
+          [
+            46.22208023071289,
+            48.0
+          ],
+          [
+            49.703800201416016,
+            48.0
+          ],
+          [
+            53.40592956542969,
+            48.0
+          ],
+          [
+            56.920440673828125,
+            48.0
+          ],
+          [
+            60.60689926147461,
+            48.0
+          ]
+        ],
+        "phase": [
+          5.290465831756592,
+          5.111338138580322,
+          0.8468655347824097,
+          4.2611165046691895,
+          3.0852198600769043,
+          5.941551685333252,
+          1.1386147737503052,
+          3.4944794178009033
+        ],
+        "field_norm": 0.6365942358970642
+      },
+      "label": "B"
+    },
+    {
+      "seed": 1,
+      "sequence": "ACGTACGT",
+      "interaction_rms_by_probe": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "interaction_output_rms": 0.0,
+      "interaction_center_rms": 0.0,
+      "interaction_near_input_rms": 0.0,
+      "bonded_output_response_rms": 0.0007414045976474881,
+      "cut_output_response_rms": 0.0007414045976474881,
+      "sham_minus_cut_rms": 0.0,
+      "unforced_bond_cut_rms": 0.0,
+      "bond_cut_geometry_mean_distance": 0.0,
+      "bonded_input_induced_geometry_mean_distance": 0.0,
+      "bonded_output_to_cut_output_rms_ratio": 1.0,
+      "initial": {
+        "step": 500,
+        "position": [
+          [
+            35.47580337524414,
+            48.0
+          ],
+          [
+            39.09049987792969,
+            48.0
+          ],
+          [
+            42.601646423339844,
+            48.0
+          ],
+          [
+            46.18965530395508,
+            48.0
+          ],
+          [
+            49.762969970703125,
+            48.0
+          ],
+          [
+            53.395748138427734,
+            48.0
+          ],
+          [
+            57.003662109375,
+            48.0
+          ],
+          [
+            60.58906173706055,
+            48.0
+          ]
+        ],
+        "phase": [
+          1.330277681350708,
+          0.40601348876953125,
+          0.5901055932044983,
+          1.6628854274749756,
+          5.657284736633301,
+          4.886473178863525,
+          2.68748140335083,
+          5.012629985809326
+        ],
+        "field_norm": 0.7807866334915161
+      },
+      "label": "A"
+    },
+    {
+      "seed": 1,
+      "sequence": "AGCTAGCT",
+      "interaction_rms_by_probe": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "interaction_output_rms": 0.0,
+      "interaction_center_rms": 0.0,
+      "interaction_near_input_rms": 0.0,
+      "bonded_output_response_rms": 0.0007462227367796004,
+      "cut_output_response_rms": 0.0007462227367796004,
+      "sham_minus_cut_rms": 0.0,
+      "unforced_bond_cut_rms": 0.0,
+      "bond_cut_geometry_mean_distance": 0.0,
+      "bonded_input_induced_geometry_mean_distance": 0.0,
+      "bonded_output_to_cut_output_rms_ratio": 1.0,
+      "initial": {
+        "step": 500,
+        "position": [
+          [
+            35.33732223510742,
+            48.0
+          ],
+          [
+            38.99577331542969,
+            48.0
+          ],
+          [
+            42.5681037902832,
+            48.0
+          ],
+          [
+            46.1413459777832,
+            48.0
+          ],
+          [
+            49.73676681518555,
+            48.0
+          ],
+          [
+            53.284942626953125,
+            48.0
+          ],
+          [
+            56.83158493041992,
+            48.0
+          ],
+          [
+            60.50415802001953,
+            48.0
+          ]
+        ],
+        "phase": [
+          2.1975109577178955,
+          1.5005918741226196,
+          6.059125900268555,
+          1.6958876848220825,
+          5.805680751800537,
+          0.19238312542438507,
+          0.8883109092712402,
+          5.057992935180664
+        ],
+        "field_norm": 1.018608570098877
+      },
+      "label": "B"
+    },
+    {
+      "seed": 2,
+      "sequence": "ACGTACGT",
+      "interaction_rms_by_probe": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "interaction_output_rms": 0.0,
+      "interaction_center_rms": 0.0,
+      "interaction_near_input_rms": 0.0,
+      "bonded_output_response_rms": 0.0007688325131312013,
+      "cut_output_response_rms": 0.0007688325131312013,
+      "sham_minus_cut_rms": 0.0,
+      "unforced_bond_cut_rms": 0.0,
+      "bond_cut_geometry_mean_distance": 0.0,
+      "bonded_input_induced_geometry_mean_distance": 0.0,
+      "bonded_output_to_cut_output_rms_ratio": 1.0,
+      "initial": {
+        "step": 500,
+        "position": [
+          [
+            35.442806243896484,
+            48.0
+          ],
+          [
+            39.047061920166016,
+            48.0
+          ],
+          [
+            42.64297866821289,
+            48.0
+          ],
+          [
+            46.19135665893555,
+            48.0
+          ],
+          [
+            49.75943374633789,
+            48.0
+          ],
+          [
+            53.37215042114258,
+            48.0
+          ],
+          [
+            56.951271057128906,
+            48.0
+          ],
+          [
+            60.5799560546875,
+            48.0
+          ]
+        ],
+        "phase": [
+          4.916923999786377,
+          4.6660380363464355,
+          2.708852529525757,
+          2.7340455055236816,
+          4.293091773986816,
+          5.156445026397705,
+          1.798622965812683,
+          3.896955728530884
+        ],
+        "field_norm": 0.9777958393096924
+      },
+      "label": "A"
+    },
+    {
+      "seed": 2,
+      "sequence": "AGCTAGCT",
+      "interaction_rms_by_probe": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "interaction_output_rms": 0.0,
+      "interaction_center_rms": 0.0,
+      "interaction_near_input_rms": 0.0,
+      "bonded_output_response_rms": 0.0006978188175708055,
+      "cut_output_response_rms": 0.0006978188175708055,
+      "sham_minus_cut_rms": 0.0,
+      "unforced_bond_cut_rms": 0.0,
+      "bond_cut_geometry_mean_distance": 0.0,
+      "bonded_input_induced_geometry_mean_distance": 0.0,
+      "bonded_output_to_cut_output_rms_ratio": 1.0,
+      "initial": {
+        "step": 500,
+        "position": [
+          [
+            35.458248138427734,
+            48.0
+          ],
+          [
+            39.00194549560547,
+            48.0
+          ],
+          [
+            42.53704833984375,
+            48.0
+          ],
+          [
+            46.18482971191406,
+            48.0
+          ],
+          [
+            49.75941467285156,
+            48.0
+          ],
+          [
+            53.362884521484375,
+            48.0
+          ],
+          [
+            56.8682975769043,
+            48.0
+          ],
+          [
+            60.59539794921875,
+            48.0
+          ]
+        ],
+        "phase": [
+          5.627096652984619,
+          6.230058670043945,
+          0.905137836933136,
+          2.5289840698242188,
+          4.869956016540527,
+          6.021114826202393,
+          0.8072230815887451,
+          3.7869162559509277
+        ],
+        "field_norm": 0.822598397731781
+      },
+      "label": "B"
+    }
+  ],
+  "meaning": {
+    "interaction": "(bonded_driven - bonded_undriven) - (cut_driven - cut_undriven)",
+    "sham_null": "Retain bonds but set k_bond=k_bend=0; should match cut",
+    "freeze": "All monomers pinned after warmup; bond effect must be zero",
+    "limitations": "This tests a causal influence of mechanical bonds on field response, not information processing ability. The response may arise from changed trajectories; compare distal outputs and input-conditioned motion."
+  }
+}
