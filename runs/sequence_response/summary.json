@@ -1,0 +1,334 @@
+{
+  "experiment": "matched_composition_sequence_response",
+  "sequences": [
+    "ACGTACGT",
+    "AGCTAGCT"
+  ],
+  "positions": [
+    [
+      35.4,
+      48.0
+    ],
+    [
+      39.0,
+      48.0
+    ],
+    [
+      42.6,
+      48.0
+    ],
+    [
+      46.2,
+      48.0
+    ],
+    [
+      49.8,
+      48.0
+    ],
+    [
+      53.4,
+      48.0
+    ],
+    [
+      57.0,
+      48.0
+    ],
+    [
+      60.599999999999994,
+      48.0
+    ]
+  ],
+  "source": [
+    30.4,
+    48.0
+  ],
+  "probes": [
+    [
+      33.4,
+      48.0
+    ],
+    [
+      48.0,
+      48.0
+    ],
+    [
+      63.599999999999994,
+      48.0
+    ],
+    [
+      67.6,
+      48.0
+    ],
+    [
+      63.599999999999994,
+      53.0
+    ]
+  ],
+  "drive": {
+    "kind": "sine",
+    "amplitude": 0.05,
+    "omega_rad_per_step": 0.11,
+    "start": 0,
+    "duration": 250,
+    "width": 1.0,
+    "samples": []
+  },
+  "parameters": {
+    "seq_a": "ACGTACGT",
+    "seq_b": "AGCTAGCT",
+    "N": 96,
+    "device": "auto",
+    "steps": 800,
+    "warmup": 300,
+    "sample_every": 2,
+    "seed": 0,
+    "seeds": 3,
+    "kind": "sine",
+    "start": 0,
+    "duration": 250,
+    "amplitude": 0.05,
+    "omega": 0.11,
+    "width": 1.0,
+    "chain_boost": 0.0,
+    "mobile": true,
+    "out": "runs/sequence_response"
+  },
+  "physics_config": {
+    "N": 96,
+    "seed": 0,
+    "device": "auto",
+    "c2": 0.3,
+    "m2": 0.02,
+    "gamma": 0.01,
+    "Omega": 0.07,
+    "mode": "receiver",
+    "h_medium": 0.3,
+    "pump_on": true,
+    "alphabet": {
+      "A": 0.03,
+      "C": 0.05,
+      "G": 0.09,
+      "T": 0.11
+    },
+    "g_emit": 0.1,
+    "chain_boost": 0.0,
+    "g_phase": 0.02,
+    "k_force": 1.0,
+    "phase_noise": 0.0,
+    "hear_self": false,
+    "mobility": 1.0,
+    "kT": 0.0,
+    "r_core": 2.0,
+    "k_core": 0.05,
+    "d0": 3.6,
+    "k_bond": 0.05,
+    "k_bend": 0.02,
+    "held_tau": 100.0,
+    "held_min": 0.05,
+    "lig_window": 0.3,
+    "lig_decay": 0.97,
+    "lig_score": 6.0,
+    "p_lig": 0.0,
+    "lig_every": 10
+  },
+  "measure": "RMS of driven field minus matched undriven field at fixed probes",
+  "summary": [
+    {
+      "seed": 0,
+      "structure": "bonded",
+      "sequence": "ACGTACGT",
+      "label": "A",
+      "response_rms": 0.004858631175011396
+    },
+    {
+      "seed": 0,
+      "structure": "bonded",
+      "sequence": "AGCTAGCT",
+      "label": "B",
+      "response_rms": 0.007767215836793184
+    },
+    {
+      "seed": 0,
+      "structure": "unbonded",
+      "sequence": "ACGTACGT",
+      "label": "A",
+      "response_rms": 0.005104459822177887
+    },
+    {
+      "seed": 0,
+      "structure": "unbonded",
+      "sequence": "AGCTAGCT",
+      "label": "B",
+      "response_rms": 0.01092790998518467
+    },
+    {
+      "seed": 0,
+      "structure": "bare",
+      "sequence": null,
+      "label": "none",
+      "response_rms": 0.0048193419352173805
+    },
+    {
+      "seed": 0,
+      "structure": "bonded",
+      "metric": "sequence_response_contrast_rms",
+      "value": 0.005796427372843027
+    },
+    {
+      "seed": 0,
+      "structure": "unbonded",
+      "metric": "sequence_response_contrast_rms",
+      "value": 0.008579572662711143
+    },
+    {
+      "seed": 0,
+      "metric": "bond_vs_unbonded_response_rms",
+      "label": "A",
+      "value": 0.0012292215833440423
+    },
+    {
+      "seed": 0,
+      "metric": "bond_vs_unbonded_response_rms",
+      "label": "B",
+      "value": 0.005975737702101469
+    },
+    {
+      "seed": 0,
+      "metric": "bare_field_response_rms",
+      "value": 0.0048193419352173805
+    },
+    {
+      "seed": 1,
+      "structure": "bonded",
+      "sequence": "ACGTACGT",
+      "label": "A",
+      "response_rms": 0.006472801323980093
+    },
+    {
+      "seed": 1,
+      "structure": "bonded",
+      "sequence": "AGCTAGCT",
+      "label": "B",
+      "response_rms": 0.011527270078659058
+    },
+    {
+      "seed": 1,
+      "structure": "unbonded",
+      "sequence": "ACGTACGT",
+      "label": "A",
+      "response_rms": 0.007231895346194506
+    },
+    {
+      "seed": 1,
+      "structure": "unbonded",
+      "sequence": "AGCTAGCT",
+      "label": "B",
+      "response_rms": 0.01135715190321207
+    },
+    {
+      "seed": 1,
+      "structure": "bare",
+      "sequence": null,
+      "label": "none",
+      "response_rms": 0.0048193419352173805
+    },
+    {
+      "seed": 1,
+      "structure": "bonded",
+      "metric": "sequence_response_contrast_rms",
+      "value": 0.009185045957565308
+    },
+    {
+      "seed": 1,
+      "structure": "unbonded",
+      "metric": "sequence_response_contrast_rms",
+      "value": 0.007177872117608786
+    },
+    {
+      "seed": 1,
+      "metric": "bond_vs_unbonded_response_rms",
+      "label": "A",
+      "value": 0.0015531028620898724
+    },
+    {
+      "seed": 1,
+      "metric": "bond_vs_unbonded_response_rms",
+      "label": "B",
+      "value": 0.0022673371713608503
+    },
+    {
+      "seed": 1,
+      "metric": "bare_field_response_rms",
+      "value": 0.0048193419352173805
+    },
+    {
+      "seed": 2,
+      "structure": "bonded",
+      "sequence": "ACGTACGT",
+      "label": "A",
+      "response_rms": 0.006100008264183998
+    },
+    {
+      "seed": 2,
+      "structure": "bonded",
+      "sequence": "AGCTAGCT",
+      "label": "B",
+      "response_rms": 0.008192328736186028
+    },
+    {
+      "seed": 2,
+      "structure": "unbonded",
+      "sequence": "ACGTACGT",
+      "label": "A",
+      "response_rms": 0.006143976002931595
+    },
+    {
+      "seed": 2,
+      "structure": "unbonded",
+      "sequence": "AGCTAGCT",
+      "label": "B",
+      "response_rms": 0.007915385998785496
+    },
+    {
+      "seed": 2,
+      "structure": "bare",
+      "sequence": null,
+      "label": "none",
+      "response_rms": 0.0048193419352173805
+    },
+    {
+      "seed": 2,
+      "structure": "bonded",
+      "metric": "sequence_response_contrast_rms",
+      "value": 0.004325662273913622
+    },
+    {
+      "seed": 2,
+      "structure": "unbonded",
+      "metric": "sequence_response_contrast_rms",
+      "value": 0.0037413572426885366
+    },
+    {
+      "seed": 2,
+      "metric": "bond_vs_unbonded_response_rms",
+      "label": "A",
+      "value": 0.0008096007513813674
+    },
+    {
+      "seed": 2,
+      "metric": "bond_vs_unbonded_response_rms",
+      "label": "B",
+      "value": 0.0008699558093212545
+    },
+    {
+      "seed": 2,
+      "metric": "bare_field_response_rms",
+      "value": 0.0048193419352173805
+    }
+  ],
+  "caveats": [
+    "Fixed bonded and unbonded layouts with chain_boost=0 should be dynamically indistinguishable: bonds have no mechanical effect if motion is pinned.",
+    "Sequence contrasts can reflect frequency placement, not computation or topology.",
+    "This experiment trains no readout and measures no task performance."
+  ]
+}
