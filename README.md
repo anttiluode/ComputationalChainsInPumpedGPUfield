@@ -98,6 +98,40 @@ trace = record_response(w, stim, [(30, 32), (40, 32)],
 
 The core world step also accepts `world.step(external_source=field_tensor)`, where `field_tensor` must have the same 2D shape as the field. Omitting it retains the parent simulator's behavior.
 
+## Next experiment: causal bond ablation
+
+The uploaded three-seed mobile run (28 October 2026, `--steps 800 --seeds 3 --mobile`) gave sequence-contrast RMS values of **0.00580/0.00919/0.00433** with bonded chains, versus **0.00858/0.00718/0.00374** with free particles. There was no consistent bonded advantage across seeds. Importantly, the averaged sequence contrast was dominated by the first field probe near the input (**~0.015**), whereas the three far-side probes each showed **~0.0003–0.0004**. These are measurements of a particular layout and drive, not a validated computational advantage.
+
+The next control is now implemented in [experiments/bond_ablation.py](experiments/bond_ablation.py):
+
+```bash
+python experiments/bond_ablation.py --steps 600 --warmup 300 --seeds 3
+python experiments/bond_ablation.py --steps 600 --seeds 3 --freeze --out runs/ablation_frozen
+python experiments/bond_ablation.py --steps 800 --seeds 5 --omega 0.09 --out runs/ablation_009
+python -m pytest -q tests/test_ablation.py
+```
+
+**Intervention:** Warm up each bonded chain once; then fork all field, oscillator, particle-position and random-generator states *identically*. In one pair of worlds keep the bonds; in a second pair cut them; in a third pair keep the topology but set both mechanical spring constants to zero (**sham**). Apply the same probe to the driven member of each pair, and leave its twin undriven. Ligation, phase noise, thermal noise and bond-dependent emission gain are all disabled for this experiment.
+
+For every output sensor, the causal response comparison is:
+
+```text
+(bonded_driven − bonded_undriven)
+  − (cut_driven − cut_undriven)
+```
+
+This is a *difference-in-differences* in wave response, and is more carefully matched than independently warming up bonded and free worlds. It does not eliminate effects arising from changed particle trajectories; those are part of what the mechanical bond causes. The experiment records both output fields and per-particle positions to assess that mediation.
+
+The test must pass two null controls: **cut vs sham** should agree when mechanical spring forces and bond-specific emission are disabled, and **bonded vs cut after pinning** (`--freeze`) should also agree. If these fail, interpret no other findings until the bug is resolved.
+
+Outputs under `runs/bond_ablation/`:
+
+- `trace.csv`: six raw experimental conditions and the bond-intervention difference trace for every time/sample/probe.
+- `positions.npz`: the measured bead trajectories for each run and condition.
+- `summary.json`: per-probe and far-output bond-effect RMS, sham-null magnitude, unforced topology contrast and mean bead trajectory separation, including the initial warmed-up microstate.
+
+**Interpretation:** A reproducible nonzero effect at the three distal probes, with passing null controls, would establish that the mechanical links causally alter field transfer under this drive. It would *not* by itself establish a learning mechanism, a reservoir computing advantage, or neural behavior. Those require distinct held-out tasks and appropriate readout controls.
+
 ## Research program
 
 ### 1. Sequence → physical function
@@ -238,7 +272,7 @@ Live-viewer keys: `SPACE` pause, `P` toggle pump, `F` toggle field display, `+/-
 
 1. **Controlled stimuli and probes — first version implemented.** Per-seed measurements and reproducible input schedules now work; checkpoint/restart remains to be added.
 2. **Measure and validate sequence-order transfer functions.** The paired protocol exists; run seed ensembles, multiple input frequencies and orientation/phase-shuffle controls before drawing conclusions.
-3. **Add a grow/set/probe lifecycle.** Separate assembly time from measurement and permit a fixed structure with ongoing wave/phase dynamics.
+3. **Ablate bond topology causally (implemented), then add grow/set/probe lifecycle.** A new post-warmup fork-and-cut experiment measures the effect of existing bonds; the *learning-by-growth* experiment is still future work.
 4. **Benchmark temporal and nonlinear memory.** Start with a linear readout and strict held-out controls.
 5. **Optimize GPU neighbor search**, then repeat across large ensembles and examine pump-programmable computation.
 
