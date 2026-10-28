@@ -1,0 +1,36 @@
+{
+ "pump_on": [
+  {
+   "seed": 0,
+   "chains": 6,
+   "longest": 66,
+   "monomers_in_chains": 236,
+   "bond_letters": {
+    "TT": 23,
+    "AT": 31,
+    "AA": 27,
+    "AG": 15,
+    "CG": 43,
+    "CT": 16,
+    "GT": 13,
+    "GG": 23,
+    "CC": 20,
+    "AC": 19
+   },
+   "duplex": {
+    "pairs": 39,
+    "complementary": 6,
+    "fraction": 0.15384615384615385,
+    "chance": 0.24786324786324787
+   },
+   "sequences": [
+    "TTTAAGCGCTAAATTGGTGCCTTTTTGCGCCCCGCGGGCGTAAATTAATCCACCGGGGCCATAAAG",
+    "CATCGGGCCAAGCTAAATATTTCAAATTTAATATGTAAGGGAACTTTTCCGC",
+    "GACGCTACGGCAAGCGGTTCCGCCGGCCCCTAAATATTTGTTT",
+    "TAGCAGGCGGCCGCGGGTAAGAGTACAGGGGCCAG",
+    "TTTCCAAAACGGGCATACCT",
+    "AACCGCCGGCTGAAAATCTT"
+   ]
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+ "detuned": [
+  {
+   "site_events": 19,
+   "site_correct": 13,
+   "site_fidelity": 0.6842105263157895,
+   "copies": 0,
+   "copy_monomers": 0,
+   "copy_matches": 0,
+   "copy_fidelity": null,
+   "copy_seqs": [],
+   "seed": 0,
+   "soup_chains": 10,
+   "soup_len_max": 34,
+   "soup_seqs": [
+    "TGTTTGGGCCGGGCCCCCATTTTCAACCTGTGGT",
+    "TTTTGTGGGGGTGGTGTGTGTGT",
+    "TACAGACTGC",
+    "AAAAATACC",
+    "CCCGCAA",
+    "CAAAC",
+    "ACACA",
+    "GGG",
+    "AC",
+    "GG"
+   ],
+   "duplex": {
+    "pairs": 24,
+    "complementary": 0,
+    "fraction": 0.0,
+    "chance": 0.22222222222222224
+   }
+  },
+  {
+   "site_events": 18,
+   "site_correct": 9,
+   "site_fidelity": 0.5,
+   "copies": 0,
+   "copy_monomers": 0,
+   "copy_matches": 0,
+   "copy_fidelity": null,
+   "copy_seqs": [],
+   "seed": 1,
+   "soup_chains": 4,
+   "soup_len_max": 27,
+   "soup_seqs": [
+    "TTAACTTTTATCTCTTCCCCTTTATTC",
+    "AAA",
+    "TAA",
+    "AA"
+   ],
+   "duplex": {
+    "pairs": 0
+   }
+  }
+ ]
+}

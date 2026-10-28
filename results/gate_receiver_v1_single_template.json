@@ -1,0 +1,56 @@
+{
+ "receiver": [
+  {
+   "site_events": 13,
+   "site_correct": 11,
+   "site_fidelity": 0.8461538461538461,
+   "copies": 0,
+   "copy_monomers": 0,
+   "copy_matches": 0,
+   "copy_fidelity": null,
+   "copy_seqs": [],
+   "seed": 0,
+   "soup_chains": 4,
+   "soup_len_max": 11,
+   "soup_seqs": [
+    "AAAAAATTTAC",
+    "AATAATTAT",
+    "TTAAAT",
+    "TTAA"
+   ],
+   "duplex": {
+    "pairs": 8,
+    "complementary": 6,
+    "fraction": 0.75,
+    "chance": 0.46875
+   }
+  },
+  {
+   "site_events": 17,
+   "site_correct": 11,
+   "site_fidelity": 0.6470588235294118,
+   "copies": 0,
+   "copy_monomers": 0,
+   "copy_matches": 0,
+   "copy_fidelity": null,
+   "copy_seqs": [],
+   "seed": 1,
+   "soup_chains": 6,
+   "soup_len_max": 8,
+   "soup_seqs": [
+    "TTTTTCCT",
+    "TTATCAT",
+    "CCTCCC",
+    "TCC",
+    "AT",
+    "AA"
+   ],
+   "duplex": {
+    "pairs": 8,
+    "complementary": 2,
+    "fraction": 0.25,
+    "chance": 0.046875
+   }
+  }
+ ]
+}
