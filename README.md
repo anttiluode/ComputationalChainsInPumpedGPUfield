@@ -22,7 +22,7 @@ This is a computational research branch of [ChainsInPumpedGPUfield](https://gith
 | Main failure mode to investigate | Runaway growth and poor round-2 copying | Apparent computation explained by the bare field, instantaneous input, geometry alone or trivial readout |
 | Role of DNA-like chemistry | Goal | Optional way to make persistent structures; replication is **not required** |
 
-**Implementation status (28 October 2026):** The physics, viewer, templating experiments and saved results are inherited from the original project. **Controlled external field stimulation, spatial/phase probes, and a matched-composition sequence-response experiment are now implemented.** No trained reservoir readout, held-out computational task benchmark, growth-dependent learning result, or demonstrated sequence-to-function advantage exists yet. A measurable response is not automatically a computation.
+**Implementation status (28 October 2026):** The physics, viewer, templating experiments and saved results are inherited from the original project. **Controlled external field stimulation, spatial/phase probes, and a matched-composition sequence-response experiment are now implemented.** A held-out linear-readout benchmark is now available, but it has not yet been validated on experimental runs; no growth-dependent learning result or demonstrated computational advantage exists yet. A measurable response is not automatically a computation.
 
 ## What the existing simulator gives us
 
@@ -290,7 +290,7 @@ python -m pytest -q tests
 
 Live-viewer keys: `SPACE` pause, `P` toggle pump, `F` toggle field display, `+/-` change steps per frame, `S` save screenshot, left-drag stir, `ESC` exit. A red, C yellow, G green, T blue; white lines are backbone bonds.
 
-**Now available:** controlled input/output probing via `experiments/sequence_response.py`. **Not yet available:** a grow/freeze reservoir workflow or a trained readout benchmark. The inherited commands above remain unchanged.
+**Now available:** controlled input/output probing via `experiments/sequence_response.py`, causal post-warmup bond ablation via `experiments/bond_ablation.py`, and held-out ridge-readout benchmark via `experiments/temporal_memory.py`. **Not yet available:** self-grown task-dependent networks or a validated computational advantage. The inherited commands above remain unchanged.
 
 ## Development order
 
