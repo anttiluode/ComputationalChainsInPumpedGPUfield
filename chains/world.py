@@ -180,7 +180,7 @@ class World:
         return cfg.m2
 
     @torch.no_grad()
-    def step(self):
+    def step(self, external_source=None):
         cfg = self.cfg
         N = cfg.N
         psi = self.psi
@@ -228,6 +228,13 @@ class World:
         lap = (torch.roll(psi, 1, 0) + torch.roll(psi, -1, 0) +
                torch.roll(psi, 1, 1) + torch.roll(psi, -1, 1) - 4 * psi)
         new = (2 - cfg.gamma) * psi - (1 - cfg.gamma) * self.psi_prev + cfg.c2 * lap - self.m2_now() * psi + src
+        # Optional experimental forcing: supplied in field-source units per step.
+        # The ordinary simulator takes the identical code path when it is absent.
+        if external_source is not None:
+            ext = torch.as_tensor(external_source, device=self.device, dtype=psi.dtype)
+            if ext.shape != psi.shape:
+                raise ValueError(f"external_source must have shape {tuple(psi.shape)}")
+            new = new + ext
         self.psi_prev, self.psi = psi, new
         self.t += 1
         if P and self.t % cfg.lig_every == 0:
