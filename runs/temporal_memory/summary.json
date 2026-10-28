@@ -1,0 +1,785 @@
+{
+  "experiment": "held_out_temporal_memory",
+  "task": "linear readout of delayed random input bits and non-linear bit products",
+  "sequences": [
+    "ACGTACGT",
+    "AGCTAGCT"
+  ],
+  "probe_positions": [
+    [
+      62.6,
+      43.0
+    ],
+    [
+      62.6,
+      48.0
+    ],
+    [
+      62.6,
+      53.0
+    ],
+    [
+      64.6,
+      43.0
+    ],
+    [
+      64.6,
+      48.0
+    ],
+    [
+      64.6,
+      53.0
+    ],
+    [
+      66.6,
+      43.0
+    ],
+    [
+      66.6,
+      48.0
+    ],
+    [
+      66.6,
+      53.0
+    ],
+    [
+      69.6,
+      43.0
+    ],
+    [
+      69.6,
+      48.0
+    ],
+    [
+      69.6,
+      53.0
+    ],
+    [
+      72.6,
+      43.0
+    ],
+    [
+      72.6,
+      48.0
+    ],
+    [
+      72.6,
+      53.0
+    ]
+  ],
+  "parameters": {
+    "sequences": "ACGTACGT,AGCTAGCT",
+    "N": 96,
+    "device": "cpu",
+    "seed": 0,
+    "seeds": 1,
+    "input_seed": 48271,
+    "warmup": 500,
+    "symbols": 320,
+    "steps_per_symbol": 12,
+    "amplitude": 0.05,
+    "width": 1.0,
+    "discard": 20,
+    "max_lag": 8,
+    "train_fraction": 0.7,
+    "ridge": 0.01,
+    "freeze": false,
+    "out": "runs/temporal_memory"
+  },
+  "controls": [
+    {
+      "seed": 0,
+      "sequence": "ACGTACGT",
+      "sham_cut_max_abs": 0.0,
+      "bond_cut_field_rms": 0.0030196227598935366
+    },
+    {
+      "seed": 0,
+      "sequence": "AGCTAGCT",
+      "sham_cut_max_abs": 0.0,
+      "bond_cut_field_rms": 0.0030283555388450623
+    }
+  ],
+  "scores": [
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_0",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.05266835793718472,
+      "test_mse": 1.0544302715273106,
+      "baseline_mse": 1.0016737594293976,
+      "sign_accuracy": 0.45977011494252873,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_1",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06613651111845886,
+      "test_mse": 1.068949237864307,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5632183908045977,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.015176074340804258,
+      "test_mse": 1.0178543550921575,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5517241379310345,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_4",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.04645966771301535,
+      "test_mse": 1.047267795563634,
+      "baseline_mse": 1.0007722494000986,
+      "sign_accuracy": 0.5517241379310345,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_8",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.37471943736333013,
+      "test_mse": 0.6263271318744019,
+      "baseline_mse": 1.0016737594293974,
+      "sign_accuracy": 0.8160919540229885,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "parity_lag1_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.056906353932927756,
+      "test_mse": 1.0549306708945134,
+      "baseline_mse": 0.9981306924392475,
+      "sign_accuracy": 0.5517241379310345,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "parity_lag1_3",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.0639925356734643,
+      "test_mse": 1.0629628063239547,
+      "baseline_mse": 0.9990322024685466,
+      "sign_accuracy": 0.5402298850574713,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_0",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.049357125012427394,
+      "test_mse": 1.0511134963952224,
+      "baseline_mse": 1.0016737594293976,
+      "sign_accuracy": 0.4827586206896552,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_1",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.0883460289789304,
+      "test_mse": 1.0912173498206068,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5172413793103449,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.03792690065817528,
+      "test_mse": 1.0406652036083799,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5402298850574713,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_4",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06454617573664567,
+      "test_mse": 1.0653682708822356,
+      "baseline_mse": 1.0007722494000986,
+      "sign_accuracy": 0.4482758620689655,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_8",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.35509498623705593,
+      "test_mse": 0.6459844296107955,
+      "baseline_mse": 1.0016737594293974,
+      "sign_accuracy": 0.7816091954022989,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "parity_lag1_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.02683843142672604,
+      "test_mse": 1.0249189545831887,
+      "baseline_mse": 0.9981306924392475,
+      "sign_accuracy": 0.5402298850574713,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "parity_lag1_3",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06982100116998713,
+      "test_mse": 1.0687856310459578,
+      "baseline_mse": 0.9990322024685466,
+      "sign_accuracy": 0.45977011494252873,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_0",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.049357125012427394,
+      "test_mse": 1.0511134963952224,
+      "baseline_mse": 1.0016737594293976,
+      "sign_accuracy": 0.4827586206896552,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_1",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.0883460289789304,
+      "test_mse": 1.0912173498206068,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5172413793103449,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.03792690065817528,
+      "test_mse": 1.0406652036083799,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5402298850574713,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_4",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06454617573664567,
+      "test_mse": 1.0653682708822356,
+      "baseline_mse": 1.0007722494000986,
+      "sign_accuracy": 0.4482758620689655,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_8",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.35509498623705593,
+      "test_mse": 0.6459844296107955,
+      "baseline_mse": 1.0016737594293974,
+      "sign_accuracy": 0.7816091954022989,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "parity_lag1_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.02683843142672604,
+      "test_mse": 1.0249189545831887,
+      "baseline_mse": 0.9981306924392475,
+      "sign_accuracy": 0.5402298850574713,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "parity_lag1_3",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06982100116998713,
+      "test_mse": 1.0687856310459578,
+      "baseline_mse": 0.9990322024685466,
+      "sign_accuracy": 0.45977011494252873,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_0",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.10631989728406399,
+      "test_mse": 1.1081716106440733,
+      "baseline_mse": 1.0016737594293976,
+      "sign_accuracy": 0.5057471264367817,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_1",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.10084826011880255,
+      "test_mse": 1.1037525648790891,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.42528735632183906,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.024659479852982003,
+      "test_mse": 1.0273627801286154,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5287356321839081,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_4",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.008495320098951709,
+      "test_mse": 0.9922703687952968,
+      "baseline_mse": 1.0007722494000986,
+      "sign_accuracy": 0.5402298850574713,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_8",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.40592783163517965,
+      "test_mse": 0.5950665022583635,
+      "baseline_mse": 1.0016737594293974,
+      "sign_accuracy": 0.8275862068965517,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "parity_lag1_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06362565464637537,
+      "test_mse": 1.0616374111683344,
+      "baseline_mse": 0.9981306924392475,
+      "sign_accuracy": 0.5057471264367817,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "parity_lag1_3",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.05072829774488308,
+      "test_mse": 1.0497114054920973,
+      "baseline_mse": 0.9990322024685466,
+      "sign_accuracy": 0.5057471264367817,
+      "sequence": "ACGTACGT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_0",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.05241781245885857,
+      "test_mse": 1.0541793066961276,
+      "baseline_mse": 1.0016737594293976,
+      "sign_accuracy": 0.5402298850574713,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_1",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.08630324415048718,
+      "test_mse": 1.0891691756302357,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.45977011494252873,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.036274470724305674,
+      "test_mse": 1.0390084141634888,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.4827586206896552,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_4",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.006309219398940469,
+      "test_mse": 1.0070863410899349,
+      "baseline_mse": 1.0007722494000986,
+      "sign_accuracy": 0.5862068965517241,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "delay_8",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.37803994456270784,
+      "test_mse": 0.6230010669447889,
+      "baseline_mse": 1.0016737594293974,
+      "sign_accuracy": 0.7816091954022989,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "parity_lag1_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.05003114043557755,
+      "test_mse": 1.0480683092857357,
+      "baseline_mse": 0.9981306924392475,
+      "sign_accuracy": 0.4827586206896552,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bonded",
+      "task": "parity_lag1_3",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.04769295800465634,
+      "test_mse": 1.0466790033461784,
+      "baseline_mse": 0.9990322024685466,
+      "sign_accuracy": 0.5172413793103449,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_0",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06692919111812468,
+      "test_mse": 1.0687149739122581,
+      "baseline_mse": 1.0016737594293976,
+      "sign_accuracy": 0.4827586206896552,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_1",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.0736962106330159,
+      "test_mse": 1.0765288817000587,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.47126436781609193,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.028488300882200557,
+      "test_mse": 1.0312017025165263,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5057471264367817,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_4",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.01900014204099887,
+      "test_mse": 1.0197870642893905,
+      "baseline_mse": 1.0007722494000986,
+      "sign_accuracy": 0.5862068965517241,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "delay_8",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.391644908850057,
+      "test_mse": 0.6093733312201771,
+      "baseline_mse": 1.0016737594293974,
+      "sign_accuracy": 0.8735632183908046,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "parity_lag1_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.04964227491577944,
+      "test_mse": 1.047680170675194,
+      "baseline_mse": 0.9981306924392475,
+      "sign_accuracy": 0.4367816091954023,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "cut",
+      "task": "parity_lag1_3",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.05142602214254488,
+      "test_mse": 1.0504084546338095,
+      "baseline_mse": 0.9990322024685466,
+      "sign_accuracy": 0.4827586206896552,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_0",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06692919111812468,
+      "test_mse": 1.0687149739122581,
+      "baseline_mse": 1.0016737594293976,
+      "sign_accuracy": 0.4827586206896552,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_1",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.0736962106330159,
+      "test_mse": 1.0765288817000587,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.47126436781609193,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.028488300882200557,
+      "test_mse": 1.0312017025165263,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5057471264367817,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_4",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.01900014204099887,
+      "test_mse": 1.0197870642893905,
+      "baseline_mse": 1.0007722494000986,
+      "sign_accuracy": 0.5862068965517241,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "delay_8",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.391644908850057,
+      "test_mse": 0.6093733312201771,
+      "baseline_mse": 1.0016737594293974,
+      "sign_accuracy": 0.8735632183908046,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "parity_lag1_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.04964227491577944,
+      "test_mse": 1.047680170675194,
+      "baseline_mse": 0.9981306924392475,
+      "sign_accuracy": 0.4367816091954023,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "sham",
+      "task": "parity_lag1_3",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.05142602214254488,
+      "test_mse": 1.0504084546338095,
+      "baseline_mse": 0.9990322024685466,
+      "sign_accuracy": 0.4827586206896552,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_0",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.10631989728406399,
+      "test_mse": 1.1081716106440733,
+      "baseline_mse": 1.0016737594293976,
+      "sign_accuracy": 0.5057471264367817,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_1",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.10084826011880255,
+      "test_mse": 1.1037525648790891,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.42528735632183906,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.024659479852982003,
+      "test_mse": 1.0273627801286154,
+      "baseline_mse": 1.002638242585743,
+      "sign_accuracy": 0.5287356321839081,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_4",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.008495320098951709,
+      "test_mse": 0.9922703687952968,
+      "baseline_mse": 1.0007722494000986,
+      "sign_accuracy": 0.5402298850574713,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "delay_8",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": 0.40592783163517965,
+      "test_mse": 0.5950665022583635,
+      "baseline_mse": 1.0016737594293974,
+      "sign_accuracy": 0.8275862068965517,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "parity_lag1_2",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.06362565464637537,
+      "test_mse": 1.0616374111683344,
+      "baseline_mse": 0.9981306924392475,
+      "sign_accuracy": 0.5057471264367817,
+      "sequence": "AGCTAGCT"
+    },
+    {
+      "seed": 0,
+      "condition": "bare",
+      "task": "parity_lag1_3",
+      "n_train": 204,
+      "n_test": 87,
+      "test_r2": -0.05072829774488308,
+      "test_mse": 1.0497114054920973,
+      "baseline_mse": 0.9990322024685466,
+      "sign_accuracy": 0.5057471264367817,
+      "sequence": "AGCTAGCT"
+    }
+  ],
+  "split": "chronological train/test with max-lag gap; standardize on train only",
+  "important_limits": [
+    "No growth/learning of bond structure takes place: preassembled chains.",
+    "Bare field can store input history; compare bonded with cut and bare.",
+    "No parameter tuning on held-out test; task results can be negative.",
+    "Strong near-input or instantaneous responses do not show bond computation.",
+    "Three seeds are preliminary; improve sample size and generalize input sequences."
+  ]
+}

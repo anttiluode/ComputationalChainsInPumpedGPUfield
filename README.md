@@ -10,6 +10,22 @@ The central hypothesis is not that a chain must first become DNA. It is that **a
 
 > Input changes activity → activity changes connections → connections change future responses.
 
+## Status after the overnight run (29 Oct 2026) — read this first
+
+Full ledger, numbers and reproduction commands: **[RESULTS_OVERNIGHT.md](RESULTS_OVERNIGHT.md)**.
+
+* **The hypothesis failed in this physics.** The empty wave field is a better linear memory than any
+  chain world (12.81 vs bonded 10.29 vs cut 9.73, 3 seeds × 2 sequences), and no chain, soup or
+  coupling strength produces nonlinear (XOR) capacity under a proper null.
+* **Bonds matter, mechanically:** +6% over cut chains in 6/6 paired runs, because they stop the beads
+  drifting; a pinned chain does better than both.
+* **Grown soups are chaotic** at default coupling (a 10⁻⁶ rad phase kick grows ~0.04/step) and hold
+  no memory; turning phase coupling down below ≈0.003 restores memory to the bare level, never above.
+* **One real phenomenon:** A/T chains coherently relay a sub-gap carrier the medium blocks (33× the
+  bare far-field amplitude at ω = 0.11), but it carries less decodable information than the bare field.
+* **Instrument corrections:** `temporal_memory.py`'s delays 0–4 lie outside the light cone (use
+  `memory_capacity.py`); summed capacities need the shifted-bits null (`shift_null_pvalue`).
+
 ## How this differs from the parent project
 
 This is a computational research branch of [ChainsInPumpedGPUfield](https://github.com/anttiluode/ChainsInPumpedGPUfield), which asks whether complementary pairing and template copying can arise from frequency-selective wave interactions without a hard-coded letter-binding table.
@@ -135,6 +151,8 @@ Outputs under `runs/bond_ablation/`:
 ## Next milestone implemented: held-out temporal computation
 
 The 28 October 2026 bond ablation experiment showed a **nonzero distal causal bond effect** across six cases (three seeds, two sequences): output difference-in-differences RMS of **0.000096–0.000159**. The sham-cut and frozen-position controls were **exactly zero** in the user's reported runs. Bonded and cut systems' distal responses remained highly similar (~0.984 pooled correlation); the effect is real within the simulation, but **is not evidence of better computation**. Bonds primarily constrained the particles' positions.
+
+> **Correction (29 Oct):** as written, this benchmark's delays 0–4 lie outside the light cone — the distal probes are 33–43 cells from the source and waves travel at most ≈0.55 cells/step, so the input arrives ≥5 symbols later. Every condition, bare included, scores ≤0 there. Use [memory_capacity.py](experiments/memory_capacity.py), which scans lags 0–30; results in [RESULTS_OVERNIGHT.md](RESULTS_OVERNIGHT.md).
 
 To test whether *that* difference is useful rather than incidental, run the new [temporal_memory.py](experiments/temporal_memory.py) benchmark:
 

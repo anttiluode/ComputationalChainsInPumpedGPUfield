@@ -1,0 +1,6 @@
+__pycache__/
+*.pyc
+# large raw traces; summaries (summary.json, noise_rescore.json) are committed
+runs/**/*.npy
+runs/**/features.npz
+runs/**/features_*.npz
