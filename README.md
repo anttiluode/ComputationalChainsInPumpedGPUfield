@@ -132,6 +132,30 @@ Outputs under `runs/bond_ablation/`:
 
 **Interpretation:** A reproducible nonzero effect at the three distal probes, with passing null controls, would establish that the mechanical links causally alter field transfer under this drive. It would *not* by itself establish a learning mechanism, a reservoir computing advantage, or neural behavior. Those require distinct held-out tasks and appropriate readout controls.
 
+## Next milestone implemented: held-out temporal computation
+
+The 28 October 2026 bond ablation experiment showed a **nonzero distal causal bond effect** across six cases (three seeds, two sequences): output difference-in-differences RMS of **0.000096–0.000159**. The sham-cut and frozen-position controls were **exactly zero** in the user's reported runs. Bonded and cut systems' distal responses remained highly similar (~0.984 pooled correlation); the effect is real within the simulation, but **is not evidence of better computation**. Bonds primarily constrained the particles' positions.
+
+To test whether *that* difference is useful rather than incidental, run the new [temporal_memory.py](experiments/temporal_memory.py) benchmark:
+
+```bat
+git pull
+python3.13 -m pytest -q tests/test_temporal_memory.py
+python3.13 experiments/temporal_memory.py --symbols 320 --seeds 1
+python3.13 experiments/temporal_memory.py --symbols 480 --seeds 3 --out runs/memory_three_seeds
+python3.13 experiments/temporal_memory.py --symbols 320 --seeds 1 --freeze --out runs/memory_frozen
+```
+
+**Protocol:** Generate random independent input symbols (+1 or −1), hold each for 12 simulation steps, sample 15 **distal** field sensors, and train a ridge-regularized **linear readout** on the first 70% of the input stream. Discard initial washout samples and add a delay-sized gap before evaluating on the final chronological held-out segment. All reservoir physics and readout settings are fixed in advance; the readout training never sees test targets. Each seed and sequence receives the same random input stream.
+
+Four systems are measured: **bonded chain**, **mechanically cut chain**, **sham chain with zero bond/bend springs**, and **empty field**. The bonded/cut/sham worlds are exact copies of the same warmed-up microstate before the intervention. Thermal/phase noise, growth and bond-dependent emission gain are disabled.
+
+The tasks are recovery of past input bits at delays 0, 1, 2, 4 and 8, and nonlinear two-bit products (a parity/XOR-equivalent target). The script reports held-out `test_r2` (1 is perfect, 0 is the train-mean baseline, negative is worse) and binary `sign_accuracy` (about 50% is chance for balanced bits). A bare field is an essential baseline because even a linear damped wave field stores recent input history.
+
+Output `runs/temporal_memory/summary.json` includes task metrics, probe positions, randomized-input seeds and null-check statistics. `samples.npz` contains sampled wave-field features and full input streams for independent analysis.
+
+**What would matter:** A consistent held-out task improvement of bonded over both cut and bare, with sham equal to cut and frozen bonded equal to cut. The new experiment may instead yield no advantage; that would be a meaningful negative finding. This is *not* a growth-dependent learning experiment: the chains are preassembled and warmed up rather than trained to change their connections. A truly self-grown computational medium is the next separate test.
+
 ## Research program
 
 ### 1. Sequence → physical function
@@ -273,7 +297,7 @@ Live-viewer keys: `SPACE` pause, `P` toggle pump, `F` toggle field display, `+/-
 1. **Controlled stimuli and probes — first version implemented.** Per-seed measurements and reproducible input schedules now work; checkpoint/restart remains to be added.
 2. **Measure and validate sequence-order transfer functions.** The paired protocol exists; run seed ensembles, multiple input frequencies and orientation/phase-shuffle controls before drawing conclusions.
 3. **Ablate bond topology causally (implemented), then add grow/set/probe lifecycle.** A new post-warmup fork-and-cut experiment measures the effect of existing bonds; the *learning-by-growth* experiment is still future work.
-4. **Benchmark temporal and nonlinear memory.** Start with a linear readout and strict held-out controls.
+4. **Benchmark temporal and nonlinear memory (initial version implemented).** A linear readout and strict held-out bonded/cut/sham/bare controls are available; full task outcomes remain to be measured.
 5. **Optimize GPU neighbor search**, then repeat across large ensembles and examine pump-programmable computation.
 
 This repository is deliberately separate from the original: **copying is one possible outcome of the physics, but computing with structures formed by that physics is the goal here.** The test is not whether the scene resembles neurons or molecules. The test is whether its grown physical state performs a reproducible computation that the appropriate simpler controls cannot explain.
