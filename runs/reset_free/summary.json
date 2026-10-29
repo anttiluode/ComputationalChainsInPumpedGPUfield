@@ -1,0 +1,84 @@
+{
+ "parameters": {
+  "sequence": "ACGT",
+  "N": 64,
+  "seed": 0,
+  "spacing": 3.6,
+  "chain_boost": 0.0,
+  "warmup": 400,
+  "relock": 800,
+  "source_dy": 2.5,
+  "weak_amp": 0.2,
+  "weak_write": 600,
+  "strong_amp": 1.0,
+  "strong_write": 1200,
+  "delays": [
+   600,
+   4000
+  ],
+  "read": 400,
+  "trials": 96,
+  "phase_noise": 0.003,
+  "sigma": 0.001,
+  "ridge": 1.0,
+  "out": "runs/reset_free"
+ },
+ "rows": [
+  {
+   "world": "chain",
+   "scheme": "weak",
+   "delay": 600,
+   "b1": 0.84375,
+   "b2": 0.9375
+  },
+  {
+   "world": "chain",
+   "scheme": "weak",
+   "delay": 4000,
+   "b1": 0.5416666666666666,
+   "b2": 0.7604166666666666
+  },
+  {
+   "world": "chain",
+   "scheme": "strong",
+   "delay": 600,
+   "b1": 0.9895833333333334,
+   "b2": 0.625
+  },
+  {
+   "world": "chain",
+   "scheme": "strong",
+   "delay": 4000,
+   "b1": 0.9895833333333334,
+   "b2": 0.6145833333333334
+  },
+  {
+   "world": "bare",
+   "scheme": "weak",
+   "delay": 600,
+   "b1": 1.0,
+   "b2": 1.0
+  },
+  {
+   "world": "bare",
+   "scheme": "weak",
+   "delay": 4000,
+   "b1": 0.4895833333333333,
+   "b2": 0.4895833333333333
+  },
+  {
+   "world": "bare",
+   "scheme": "strong",
+   "delay": 600,
+   "b1": 1.0,
+   "b2": 0.4791666666666667
+  },
+  {
+   "world": "bare",
+   "scheme": "strong",
+   "delay": 4000,
+   "b1": 0.4791666666666667,
+   "b2": 0.5104166666666666
+  }
+ ]
+}

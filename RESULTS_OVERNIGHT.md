@@ -4,18 +4,24 @@ Run by Claude (Opus 5.5) in a cloud CPU workspace, taking over the line Astra se
 (`bond_ablation.py`, `temporal_memory.py`). All 21 existing tests pass. Every number
 below comes from a file under `runs/`; commands to reproduce are at the end.
 
-## Verdict in one paragraph
+## Verdict in one paragraph (scope corrected 29 Oct, morning)
 
-In this physics, chains and soups of pumped oscillators do **not** compute anything the
-empty wave field does not already do better. The bare field has more linear memory than
-any chain world; no configuration produces nonlinear (XOR) capacity above a significance
-gate; a grown soup with the default coupling is **chaotic** (a 10⁻⁶ rad phase kick grows
-~0.04 per step) and therefore has no memory at all. Bonds do have a reproducible effect
-(+6% linear memory over cut chains, 6/6 paired runs), but only by holding the scatterers
-still: a pinned chain does better than either. One genuine physical phenomenon turned up —
-sequence-specific coherent relay of a sub-gap carrier through A/T chains (33× the bare
-field's far amplitude) — but it carries *less* decodable information than the bare field,
-because the relay is the chains' own oscillation with its phase nudged.
+> **Correction.** The first version of this paragraph said the chains "do not compute" and that
+> "tuning won't fix that; it would take a change of physics". Both overreach. What was tested is
+> one interface: a **fixed** (frozen or near-static) medium, driven by **hold-encoded** bits,
+> read **passively** by a **linear** decoder at distant probes, scored on **fading** memory (lags
+> 0–30 symbols). Hold-encoded input contains no frequency at a bead's pump complement
+> (2Ω − ω), and that is the only frequency that pushes a bead's phase (`world.py`: the phase is
+> driven by c(t)·ψ·sin θ with c = cos 2Ωt). So that input never wrote the beads at all. Results
+> under the next heading (`RESULTS_MORNING.md`) test the interface the physics actually offers.
+
+On the interface tested overnight, the chain and soup worlds did not beat the empty wave field:
+the bare field had more fading linear memory than any chain world and no configuration showed
+XOR capacity under a proper null. Bonds had a reproducible effect (+6% over cut chains, 6/6
+paired runs) by reducing drift; a pinned chain did best. A/T chains coherently relay a sub-gap
+carrier (33× the bare far amplitude) but carried less decodable information than the bare field
+on that BPSK task. The soup "chaos" figure was measured **without input** and with a phase distance
+that ignored wrapping; see the correction under claim 8.
 
 ## Ledger
 
@@ -28,7 +34,7 @@ because the relay is the chains' own oscillation with its phase nudged.
 | 5 | Stronger input pushes chains into a nonlinear regime | **No** | Amplitude 0.2 / 0.6 / 2.0: XOR 0.000 everywhere; frozen chains converge toward bare (11.3 → 11.8 → 12.1 vs 12.49) as the input outshouts their emission. `runs/mc_amp*` |
 | 6 | Chains relay sub-gap signals the medium blocks | **Physically yes, informationally no** | Steady carrier ω=0.11 (pump-complement of A): far lock-in ATATATAT 2.05e-3, AAAATTTT 1.23e-3, AAAAAAAA 4.4e-4, ACGTACGT 1.1e-4, CG chains ≈ bare 6.3e-5. Above the gap (ω≥0.16) all chains = bare. But BPSK bits at the same carrier, same demodulating readout: bare 100% / 97% sign accuracy (σ=0 / 1e-3) vs chains 85–93% / 76–90%. `runs/tx_*`, `runs/wire011_*` |
 | 7 | A soup grown under structured input becomes a better computer than one grown quiet | **No — both are opaque** | 320 monomers, 20k growth steps, 2 seeds × 2 arms (21–38 chains, longest 15–37): grown, cut and shuffled controls all ≈0 (max 1.16) vs bare 12.49–12.69. `runs/grow_set_compute/` |
-| 8 | The soup is opaque because input is buried under its emission | **No — it is scrambled (chaos)** | 10⁻⁶ rad kick on one bead grows at +0.040/step to O(1); the oracle response (driven − undriven twin) also has zero memory. `runs/soup_diagnosis/` |
+| 8 | The soup is opaque because input is buried under its emission | **No — it diverges autonomously (scope: no input; see morning correction)** | 10⁻⁶ rad kick on one bead grows at +0.040/step to O(1); the oracle response (driven − undriven twin) also has zero memory. `runs/soup_diagnosis/` |
 | 9 | Turning coupling down finds an edge-of-chaos window with XOR | **No** | See sweep below. Chaos at default coupling; stable below g_phase ≈ 0.003; linear memory returns to the bare level, never above; XOR is zero under the shifted-bits null (raw p = 0.05–0.07, same as the linear g = 0 control). `runs/soup_sweep*` |
 
 ## The coupling sweep (one frozen grown soup, g_phase varied)
@@ -76,21 +82,19 @@ stable soups give p = 0.05–0.07 — the same as the linear control (p = 0.07) 
 task gives p = 0 (observed 9.74 vs null mean 0.02), so the test does detect real capacity.
 **Any future capacity claim in this repo should quote the shifted-bits p-value.**
 
-## Why the oscillators cannot compute here (mechanism)
+## Why that interface failed (mechanism) — and what it did not rule out
 
-* The field is linear and the readout is linear, so any nonlinearity must come from the
-  beads. The input reaches a bead only through its **phase**, and a bead's emission
-  `cos θ` does not depend on how hard it is driven.
-* Weak phase coupling: perturbations stay small, `cos(θ₀+δθ) ≈ cos θ₀ − δθ sin θ₀` is
-  linear in δθ, δθ is linear in the input → no XOR, and the beads' own large oscillation
-  only adds interference for the readout.
-* Strong phase coupling: many coupled phase oscillators go chaotic → no fading memory.
-* Nothing in between saturates (no tanh-like element in the input path), so there is no
-  regime with both fading memory and nonlinearity. Tuning won't fix that; it would take
-  a change of physics, e.g. emission amplitude that saturates with drive, or detuned
-  (Adler) locking where the phase sits in a stable, sinusoidally curved well. Untested
-  hypotheses, listed so the next attempt targets the actual missing ingredient.
-
+* The field is linear and the readout was linear, so any nonlinearity has to come from the beads.
+  The input reaches a bead only through its **phase**, and only through the component of the
+  field at the bead's pump complement 2Ω − ω. Hold-encoded bits have none, so δθ stayed tiny and
+  `cos(θ₀+δθ) ≈ cos θ₀ − δθ sin θ₀` was linear: no XOR, and the beads' own oscillation was just
+  interference for the readout.
+* That is a statement about the small-δθ regime the overnight input left the beads in. It is
+  **not** a statement that the physics has no nonlinear regime: `cos(θ₀+δθ)` is strongly
+  nonlinear for δθ ~ π/2, and a resonant (complement-frequency) write reaches that.
+  ~~Tuning won't fix that; it would take a change of physics.~~ Withdrawn — unsupported.
+* "Strong coupling → chaos" was measured without input. Reliable driven computation needs the
+  *conditional* (input-driven) stability, which was not measured overnight.
 ## What is reusable
 
 The instruments are now honest and general, and can be pointed at any field simulation

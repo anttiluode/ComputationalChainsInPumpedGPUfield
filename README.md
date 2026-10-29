@@ -10,21 +10,26 @@ The central hypothesis is not that a chain must first become DNA. It is that **a
 
 > Input changes activity → activity changes connections → connections change future responses.
 
-## Status after the overnight run (29 Oct 2026) — read this first
+## Status (29 Oct 2026) — read this first
 
-Full ledger, numbers and reproduction commands: **[RESULTS_OVERNIGHT.md](RESULTS_OVERNIGHT.md)**.
+**Current result: [RESULTS_MORNING.md](RESULTS_MORNING.md).** Earlier, narrower run, with its
+corrections: [RESULTS_OVERNIGHT.md](RESULTS_OVERNIGHT.md).
 
-* **The hypothesis failed in this physics.** The empty wave field is a better linear memory than any
-  chain world (12.81 vs bonded 10.29 vs cut 9.73, 3 seeds × 2 sequences), and no chain, soup or
-  coupling strength produces nonlinear (XOR) capacity under a proper null.
-* **Bonds matter, mechanically:** +6% over cut chains in 6/6 paired runs, because they stop the beads
-  drifting; a pinned chain does better than both.
-* **Grown soups are chaotic** at default coupling (a 10⁻⁶ rad phase kick grows ~0.04/step) and hold
-  no memory; turning phase coupling down below ≈0.003 restores memory to the bare level, never above.
-* **One real phenomenon:** A/T chains coherently relay a sub-gap carrier the medium blocks (33× the
-  bare far-field amplitude at ω = 0.11), but it carries less decodable information than the bare field.
-* **Instrument corrections:** `temporal_memory.py`'s delays 0–4 lie outside the light cone (use
-  `memory_capacity.py`); summed capacities need the shifted-bits null (`shift_null_pvalue`).
+* **The chains are a memory the empty field cannot be.** A carrier at a pair's pump complement
+  (2Ω − ω) writes the pair's *difference* phase. The pump locks the sum, but the difference is
+  neutral, so it does not fade. Two bits written on 0.03 and 0.09 are read back at 98–100% after
+  6000 silent steps; the bare field is at chance by 2000.
+* **Sequence is the address map.** Frequency selects the pair, position selects the block
+  (sub-gap carriers are evanescent), and phase stores the bit.
+* **Hidden-memory backflow, by the paper's protocol.** With the entire field state made identical
+  across trials, the chain's history still decodes at 98–100%; the bare field holds exactly nothing.
+* **Nonlinear.** Two writes into one register add in phase, and the cosine emission turns the sum
+  into XOR. The two-bit response is non-additive at 8–11σ; the bare field is additive.
+* **Reset-free overwrite** by saturation (injection-lock) writes: A/T 0.99 from random starts; C/G partial.
+* **Experience selects assembly.** Soups grown under carrier 0.03 build A/T chains and exclude G;
+  under 0.09 they build C/G chains and exclude T. Quiet soups barely bond.
+* Overnight's fading-memory / hold-encoded-input benchmark still shows no advantage on that
+  interface. Its "tuning won't fix that" claim is withdrawn.
 
 ## How this differs from the parent project
 
