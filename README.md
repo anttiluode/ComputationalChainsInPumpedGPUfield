@@ -15,11 +15,12 @@ The central hypothesis is not that a chain must first become DNA. It is that **a
 **Current result: [RESULTS_MORNING.md](RESULTS_MORNING.md).** Earlier, narrower run, with its
 corrections: [RESULTS_OVERNIGHT.md](RESULTS_OVERNIGHT.md).
 
-* **The chains are a memory the empty field cannot be.** A carrier at a pair's pump complement
+* **Pumped oscillator pairs are a memory the empty field cannot be.** (Shown with pinned,
+  unbonded monomers; the role of bonds is untested.) A carrier at a pair's pump complement
   (2Ω − ω) writes the pair's *difference* phase. The pump locks the sum, but the difference is
   neutral, so it does not fade. Two bits written on 0.03 and 0.09 are read back at 98–100% after
   6000 silent steps; the bare field is at chance by 2000.
-* **Sequence is the address map.** Frequency selects the pair, position selects the block
+* **Letter order is the address map.** Frequency selects the pair, position selects the block
   (sub-gap carriers are evanescent), and phase stores the bit.
 * **Hidden-memory backflow, by the paper's protocol.** With the entire field state made identical
   across trials, the chain's history still decodes at 98–100%; the bare field holds exactly nothing.
@@ -27,7 +28,8 @@ corrections: [RESULTS_OVERNIGHT.md](RESULTS_OVERNIGHT.md).
   into XOR. The two-bit response is non-additive at 8–11σ; the bare field is additive.
 * **Reset-free overwrite** by saturation (injection-lock) writes: A/T 0.99 from random starts; C/G partial.
 * **Experience selects assembly.** Soups grown under carrier 0.03 build A/T chains and exclude G;
-  under 0.09 they build C/G chains and exclude T. Quiet soups barely bond.
+  under 0.09 they build C/G chains and exclude T. Quiet soups barely bond. Whether that organisation
+  then stores better at its own address (a cross-over test) is the open gate.
 * Overnight's fading-memory / hold-encoded-input benchmark still shows no advantage on that
   interface. Its "tuning won't fix that" claim is withdrawn.
 

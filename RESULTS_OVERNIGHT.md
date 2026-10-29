@@ -10,10 +10,12 @@ below comes from a file under `runs/`; commands to reproduce are at the end.
 > "tuning won't fix that; it would take a change of physics". Both overreach. What was tested is
 > one interface: a **fixed** (frozen or near-static) medium, driven by **hold-encoded** bits,
 > read **passively** by a **linear** decoder at distant probes, scored on **fading** memory (lags
-> 0–30 symbols). Hold-encoded input contains no frequency at a bead's pump complement
-> (2Ω − ω), and that is the only frequency that pushes a bead's phase (`world.py`: the phase is
-> driven by c(t)·ψ·sin θ with c = cos 2Ωt). So that input never wrote the beads at all. Results
-> under the next heading (`RESULTS_MORNING.md`) test the interface the physics actually offers.
+> 0–30 symbols). Only field at a bead's pump complement (2Ω − ω) pushes its phase (`world.py`:
+> the phase is driven by c(t)·ψ·sin θ with c = cos 2Ωt). Random hold-encoded bits do contain that
+> frequency, but with random sign every symbol, so they drove the pairs' free (difference) phase
+> as a random walk: history integrated, not decodable at fixed lags. (An earlier version of this
+> note said the input "never wrote the beads"; that was wrong, see `RESULTS_MORNING.md` §1.)
+> `RESULTS_MORNING.md` tests a coherent, phase-referenced write instead.
 
 On the interface tested overnight, the chain and soup worlds did not beat the empty wave field:
 the bare field had more fading linear memory than any chain world and no configuration showed

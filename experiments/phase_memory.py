@@ -8,8 +8,9 @@ couples cos(2 Omega t) cos(theta_j) sin(theta_i), whose DC part depends on
 theta_i + theta_j - 2 Omega t: the SUM phase is locked to the pump (restoring, forgets) and
 the DIFFERENCE theta_i - theta_j is neutral (remembers). Measured: a write first kicks the
 sum; the pump lock pulls the sum back and leaves a lasting shift in the difference.
-This is the memory the overnight fading-memory benchmark could not see: its hold-encoded
-bits had no complement component at all.
+The overnight fading-memory benchmark could not see this memory: its random hold-encoded bits
+kicked the neutral phase with random sign every symbol, a random walk that integrates history
+and is undecodable at fixed lags.
 
 Protocol, one trial: warm (shared) -> write bits as BPSK on carriers for --write steps ->
 silence -> passive read windows of --read steps starting --delays after the write ends.

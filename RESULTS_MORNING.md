@@ -13,8 +13,18 @@ over trials, with Gaussian probe noise σ = 1e-3 added before demodulation unles
 ## 1. Why overnight failed, and what the physics actually offers
 
 `world.py` pushes a bead's phase by `c(t)·ψ·sin θ` with pump `c(t) = cos 2Ωt`. That has a DC part
-only when the field holds the bead's **pump complement** `2Ω − ω`. Overnight's hold-encoded bits
-had no such component, so they never wrote the beads. They only added interference.
+only when the field holds the bead's **pump complement** `2Ω − ω`.
+
+*Corrected after Astra's review (it was right):* the first version of this file said the overnight
+hold-encoded bits "had no such component, so they never wrote the beads". That is false. Random
+12-step bits are broadband and do contain the complement frequencies. Checked directly with the
+overnight source geometry: six different bit streams drive the pairs' difference phases apart,
+A/T by 0.22 → 0.61 rad and C/G by 0.10 → 0.32 rad over 600 → 4800 steps at amplitude 0.05
+(1.1–1.5 rad for A/T at amplitude 0.2). So the overnight input *did* write the beads, but
+incoherently. Each symbol gives a kick of random sign, and the neutral phase integrates them into
+a **random walk** that carries the whole history. A readout of individual bits at fixed lags
+cannot decode that, and the random walk adds slowly wandering emission for the readout to fight.
+What overnight lacked was a phase-referenced (coherent) write, not a write.
 
 For a complement pair (A+T or C+G, frequencies summing to 2Ω), the pump couples
 `cos 2Ωt · cos θ_j · sin θ_i`, whose DC part depends on `θ_i + θ_j − 2Ωt`. So:
@@ -33,11 +43,15 @@ Measured (`tests/test_phase_memory_physics.py`; 600-step write at ±carrier, the
 
 The write first kicks the sum. The pump lock pulls the sum back and leaves the shift in the
 difference. Overnight's fading-memory benchmark (lags 0–30 symbols, random bits) could not
-see a non-fading integrator, and its input never drove one anyway.
+see a non-fading integrator, and its input drove that integrator only as a random walk.
 
 Addressing comes from the arithmetic, not a lookup table: carrier 0.03 or 0.11 writes the A/T pair,
-0.05 or 0.09 writes the C/G pair. **The chain's sequence is the address map, frequency is the
-address, the difference phase is the storage.**
+0.05 or 0.09 writes the C/G pair. **The arrangement's letter order is the address map, frequency
+is the address, the difference phase is the storage.**
+
+*Terminology:* sections 2–6 use pinned, **unbonded** monomers (`chain_boost` 0, no ligation).
+"Chain" there means an ordered arrangement of oscillators, not a bonded chain. The memory is
+oscillator memory; whether bonds or bonded order add anything to it is untested.
 
 ## 2. Write → wait → read beats the bare field (`phase_memory.py`, 128 trials)
 
@@ -149,8 +163,9 @@ next to it. K blocks of `ACGT`, 24 cells apart, give 2K registers. Each trial wr
 bits at once. Readout is local: bit (k, register) is decoded only from block k's probes, like a
 RAM row select. Crosstalk is decoded from the neighbouring block's probes.
 
-`runs/phase_ram`, 96 trials, phase noise 0.003. "Bits stored" is the information equivalent
-Σ(1 − H₂(accuracy)) over all written bits:
+`runs/phase_ram`, 96 trials, phase noise 0.003. "Bits stored" is an accuracy-derived score,
+Σ(1 − H₂(accuracy)) over all written bits, not an independently estimated channel capacity.
+Adding blocks also adds space, oscillators, sources and probes:
 
 | blocks | bits written | bits stored at 2000 steps (chain / bare) | at 6000 (chain / bare) | worst register at 6000 | neighbour-probe crosstalk at 6000 |
 |---|---|---|---|---|---|
@@ -161,8 +176,10 @@ RAM row select. Crosstalk is decoded from the neighbouring block's probes.
 Capacity grows with chain length. Most registers read at 0.97–1.00, but the A/T register of
 interior blocks is weak (0.54–0.88), and a block's bits can also be decoded from its neighbour's
 probes (0.76–0.84). Position addressing is therefore partial: some leakage comes through
-propagating pump sidebands or write spill-over. Wider block spacing, or reading at the letter
-frequency only (which is evanescent), are the obvious fixes; neither is tested yet.
+write spill-over or the evanescent tail of the neighbour's own emission. (The first version
+suggested demodulating at the letter frequencies only as a fix. `phase_ram.py` already does
+exactly that, so the leak is not through pump sidebands.) Wider block spacing is the obvious
+fix and is untested.
 
 ## 7. Experience decides what assembles (`experience_growth.py`)
 
@@ -180,9 +197,10 @@ are bonded fraction per letter, min–max over seeds:
 | carrier 0.09 | 0.57–0.72 | 0.78–0.81 | 0.60–0.66 | **0.04–0.16** | 34–40 | 15–23 |
 
 Experience both triggers assembly and selects its composition. A 0.03 soup builds A/T(+C)
-chains and leaves G out; a 0.09 soup builds C/G(+A) chains and leaves T out. That is the
-material writing, from what it hears, the address map that section 2 later writes and reads
-through. At 20 000 steps bonding saturates, but the C channel stays clean: C's `held_by` is
+chains and leaves G out; a 0.09 soup builds C/G(+A) chains and leaves T out. Every soup keeps
+the same inventory (80 of each letter): the carrier changes which monomers bond and how they
+are organised, not which oscillators exist. Whether that organisation makes the soup a better
+store at the matching address is untested, and is next gate 1. At 20 000 steps bonding saturates, but the C channel stays clean: C's `held_by` is
 0.95–0.99 under 0.09 versus 0.10–0.81 quiet (3 seeds).
 
 ## 8. Corrections to overnight claims
@@ -217,8 +235,11 @@ phases, a passive or ping read recovers them. The Muruga et al. paper → the ma
 
 ## Next gates
 
-1. Full loop: grow under carrier X, freeze, and show the grown structure stores more at address X
-   than a soup grown under Y.
+1. Full loop, as a **cross-over** (Astra's design): grow under 0.03 and under 0.09; erase residual
+   growth phase and field state while keeping the arrangement; then write and read fresh at both
+   addresses, with inventories and readout matched and an emission-matched control (growth runs
+   use `chain_boost`). Success means each history improves storage at its own address. One soup
+   simply doing better at everything would not count.
 2. Reset-free C/G: per-register write tuning so both registers overwrite cleanly (R ≥ 0.95).
 3. Feedback, the paper's other half: measure first, then choose the write phase from the
    measurement (the paper's double-measurement protocol), to recover weak writes without saturation.
